@@ -1,0 +1,29 @@
+.card
+  position: relative
+  &__wrapper
+    width: 100%
+    min-height: 70px
+    padding: 10px
+    border-radius: 10px
+    box-shadow: 5px 5px 10px #0000001f
+    background-color: white
+    cursor: pointer
+  &__edit
+    display: none
+    position: absolute
+    right: 8px
+    top: 8px
+  &__comment
+    height: 15px
+    margin-top: 10px
+    display: flex
+    align-items: center
+    gap: 5px
+    img
+      height: 100%
+    span
+      font-size: 13px
+  &__active
+    background-color: #f1f2f4
+    .card__edit
+      display: block
