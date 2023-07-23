@@ -16,18 +16,21 @@ const TextArea: FC<ITextArea> = ({ value, CSSModifier = "", modificationMode = t
     }
   }
 
-  const handleInputTextArea: THandleInputTextArea = (value) => {
+  const handleCalculateHight = () => {
 
     checkEmpty(value);
-
-    if (setValue) {
-      setValue(value);
-    }
 
     if (textAreaRef.current != null) {
       textAreaRef.current.style.height = 0 + "px";
       textAreaRef.current.style.height = textAreaRef.current?.scrollHeight + "px";
     }
+  }
+
+  const handleInputTextArea: THandleInputTextArea = (value) => {
+    if (setValue) {
+      setValue(value);
+    }
+    handleCalculateHight();
   }
 
   const handleBlur = () => {
@@ -42,7 +45,7 @@ const TextArea: FC<ITextArea> = ({ value, CSSModifier = "", modificationMode = t
     if (focus) {
       setTimeout(() => textAreaRef.current?.focus());
     }
-    handleInputTextArea(value);
+    handleCalculateHight();
   }, [modificationMode])
 
   const showUI = modificationMode ? (
