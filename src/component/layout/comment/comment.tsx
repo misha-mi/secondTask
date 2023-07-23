@@ -1,4 +1,5 @@
 import "./comment.sass";
+import { IComment, THandleToggleChangeMod, THandleModify } from "./types";
 
 import Title from "../../ui/title/title";
 import AddItem from "../add-item/add-item";
@@ -7,8 +8,6 @@ import { useAppDispatch } from "../../../store/redux-hooks";
 import { commentsActions } from "../../../store/ducks/comments";
 
 import { FC, useState } from "react";
-
-import { IComment, THandleToggleChangeMod, THandleModify } from "./types";
 
 const Comment: FC<IComment> = ({ setBlockESC, commentData }) => {
 

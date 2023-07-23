@@ -1,4 +1,5 @@
 import "./comments.sass";
+import { IComments, THandleAdd, THandleAddingMode } from "./types";
 
 import Title from "../../ui/title/title";
 import Button from "../../ui/button/button";
@@ -6,19 +7,20 @@ import Comment from "../comment/comment";
 import AddItem from "../add-item/add-item";
 
 import { useAppDispatch, useAppSelector } from "../../../store/redux-hooks";
+import { selectAuthor, selectComments } from "../../../store/selectors";
 import { commentsActions } from "../../../store/ducks/comments";
 
 import { v4 as uuidv4 } from 'uuid';
 
 import { FC, useState } from "react";
 
-import { IComments, THandleAdd, THandleAddingMode } from "./types";
 
-const Comments: FC<IComments> = ({ setBlockESC, idCard, setCountComments }) => {
+
+const Comments: FC<IComments> = ({ setBlockESC, idCard }) => {
 
   const dispatch = useAppDispatch();
-  const author = useAppSelector(state => state.author);
-  const comments = useAppSelector(state => state.comments);
+  const author = useAppSelector(selectAuthor);
+  const comments = useAppSelector(selectComments);
 
   const [addingMode, setAddingMode] = useState<boolean>(false);
 

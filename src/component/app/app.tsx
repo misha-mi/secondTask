@@ -5,20 +5,19 @@ import ColumnsPage from "../../pages/columns-page/columns-page";
 import CardPage from "../../pages/card-page/card-page";
 
 import { useAppSelector, useAppDispatch } from "../../store/redux-hooks";
+import { selectAuthor, selectOpenedCard } from "../../store/selectors";
 import { openedCardActions } from "../../store/ducks/opened-card";
 
-import { FC, useState, useEffect } from "react";
+import { FC, useState } from "react";
 
 const ShowPage: FC = () => {
 
-  const nameAuthor = useAppSelector(state => state.author);
+  const nameAuthor = useAppSelector(selectAuthor);
   const [showPage, setShopPage] = useState<string>("greeting");
 
-  useEffect(() => {
-    if (nameAuthor && showPage === "greeting") {
-      setShopPage("columns");
-    }
-  }, [nameAuthor])
+  if (nameAuthor && showPage === "greeting") {
+    setShopPage("columns");
+  }
 
   switch (showPage) {
     case "greeting":
@@ -33,7 +32,7 @@ const ShowPage: FC = () => {
 const App: FC = () => {
 
   const dispatch = useAppDispatch();
-  const openedCardId = useAppSelector(state => state.openedCard);
+  const openedCardId = useAppSelector(selectOpenedCard);
 
   return (
     <div className="app">

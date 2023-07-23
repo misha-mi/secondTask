@@ -1,8 +1,7 @@
 import "./title.sass";
+import { ITitle } from "./types";
 
 import { FC } from "react";
-
-import { ITitle } from "./types";
 
 const Title: FC<ITitle> = ({ titleText }) => {
   return (

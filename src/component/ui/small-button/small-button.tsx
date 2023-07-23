@@ -1,8 +1,8 @@
 import "./small-button.sass";
+import { ISmallButton } from "./types";
 
 import { FC } from "react";
 
-import { ISmallButton } from "./types";
 
 const SmallButton: FC<ISmallButton> = ({ imgPng, onClick }) => {
   return (

@@ -4,6 +4,7 @@ import Column from "../../component/layout/column/column";
 import TextArea from "../../component/ui/text-area/text-area";
 
 import { useAppSelector, useAppDispatch } from "../../store/redux-hooks";
+import { selectAuthor, selectColumns } from "../../store/selectors";
 import { authorActions } from "../../store/ducks/author";
 
 import { FC } from "react";
@@ -11,8 +12,8 @@ import { FC } from "react";
 const ColumnsPage: FC = () => {
 
   const dispatch = useAppDispatch();
-  const userName = useAppSelector(state => state.author);
-  const columns = useAppSelector(state => state.columns);
+  const userName = useAppSelector(selectAuthor);
+  const columns = useAppSelector(selectColumns);
 
   return (
     <div className="columns-page">

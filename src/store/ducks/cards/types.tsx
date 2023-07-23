@@ -15,7 +15,7 @@ export interface IDelete {
 interface IPayloadModify {
   cardID: string,
   key: string,
-  newValue: string | number
+  newValue: string
 }
 
 export interface IModify {

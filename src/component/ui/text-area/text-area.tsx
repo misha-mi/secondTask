@@ -1,8 +1,8 @@
 import "./text-area.sass";
+import { ITextArea, THandleInputTextArea } from "./types";
 
 import { FC, FormEvent, useRef, useEffect } from "react";
 
-import { ITextArea, THandleInputTextArea } from "./types";
 
 const TextArea: FC<ITextArea> = ({ value, CSSModifier = "", modificationMode = true, focus = false, setValue }) => {
 

@@ -1,3 +1,5 @@
+import { IAddItem, IForm } from "./types";
+
 import TextArea from "../../ui/text-area/text-area"
 import Button from "../../ui/button/button";
 
@@ -6,8 +8,6 @@ import useClickKey from "../../../hook/use-click-key";
 
 import { useForm, SubmitHandler, Controller, FormProvider } from "react-hook-form";
 import { FC, useRef } from "react"
-
-import { IAddItem, IForm } from "./types";
 
 const AddItem: FC<IAddItem> = ({ value, onAdd, onClose }) => {
 

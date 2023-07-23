@@ -1,8 +1,8 @@
 import "./button.sass";
+import { IButton } from "./types";
 
 import { FC } from "react";
 
-import { IButton } from "./types";
 
 const Button: FC<IButton> = ({ buttonText, onClick }) => {
 

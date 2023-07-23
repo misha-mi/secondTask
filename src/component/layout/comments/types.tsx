@@ -1,7 +1,6 @@
 export interface IComments {
   setBlockESC: (block: boolean) => void,
-  idCard: string,
-  setCountComments: (key: string, newValue: number) => void
+  idCard: string
 }
 
 export type THandleAddingMode = (bool: boolean) => void

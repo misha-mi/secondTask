@@ -1,4 +1,5 @@
 import "./popup-greeting.sass";
+import { IForm } from "./types";
 
 import { useAppDispatch } from "../../store/redux-hooks";
 import { authorActions } from "../../store/ducks/author";
@@ -6,7 +7,6 @@ import { authorActions } from "../../store/ducks/author";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FC } from "react";
 
-import { IForm } from "./types";
 
 const PopupGreeting: FC = () => {
 

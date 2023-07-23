@@ -23,11 +23,9 @@ const reducer = (
           if (item.cardID === action.payload.cardID) {
             switch (action.payload.key) {
               case "name":
-                return { ...item, name: String(action.payload.newValue) }
-              case "countComments":
-                return { ...item, countComments: +action.payload.newValue }
+                return { ...item, name: action.payload.newValue }
               case "description":
-                return { ...item, description: String(action.payload.newValue) }
+                return { ...item, description: action.payload.newValue }
             }
           }
           return item;

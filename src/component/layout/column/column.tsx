@@ -1,4 +1,5 @@
 import "./column.sass";
+import { IColumn, THandleAddCard, THandleModifyColumnName } from "./types";
 
 import TextArea from "../../ui/text-area/text-area";
 import Card from "../card/card";
@@ -6,30 +7,22 @@ import AddItem from "../add-item/add-item";
 import Button from "../../ui/button/button";
 
 import { useAppDispatch, useAppSelector } from "../../../store/redux-hooks";
+import { selectAuthor, selectCards, selectColumns } from "../../../store/selectors";
 import { cardsActions } from "../../../store/ducks/cards";
 import { columnsActions } from "../../../store/ducks/columns";
 
-import { FC, useState, useEffect } from "react";
+import { FC, useState } from "react";
 
 import { v4 as uuidv4 } from 'uuid';
-
-import { IColumn, THandleAddCard, THandleModifyColumnName } from "./types";
-
 
 const Column: FC<IColumn> = ({ columnIDForFilter }) => {
 
   const [addingMode, setAddingMode] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
-  const cards = useAppSelector(state => state.cards);
-  const author = useAppSelector(state => state.author);
-  const columnName = useAppSelector(state => state.columns[columnIDForFilter]);
-
-  // const cardsByID = useAppSelector((state) => selectCardsById(state, columnIDForFilter));
-
-  useEffect(() => {
-    console.log(cards, columnIDForFilter);
-  }, [cards]);
+  const cards = useAppSelector(selectCards);
+  const author = useAppSelector(selectAuthor);
+  const columnName = useAppSelector(selectColumns)[columnIDForFilter];
 
   const handleClose = () => {
     setAddingMode(false);

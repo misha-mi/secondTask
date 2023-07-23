@@ -1,6 +1,7 @@
 import "./card-page.sass";
 import close from "../../assets/trash.png";
 import trash from "../../assets/close.png";
+import { ICardPage, THandleModify, TDeleteCommentsByCardId } from "./types";
 
 import TextArea from "../../component/ui/text-area/text-area";
 import SmallButton from "../../component/ui/small-button/small-button";
@@ -8,6 +9,7 @@ import Title from "../../component/ui/title/title";
 import Comments from "../../component/layout/comments/comments";
 
 import { useAppSelector, useAppDispatch } from "../../store/redux-hooks";
+import { selectCards, selectColumns, selectComments } from "../../store/selectors";
 import { cardsActions } from "../../store/ducks/cards";
 import { commentsActions } from "../../store/ducks/comments";
 
@@ -15,8 +17,6 @@ import useOutsideClick from "../../hook/use-outside-click";
 import useClickKey from "../../hook/use-click-key";
 
 import { FC, useRef, useState } from "react";
-
-import { ICardPage, THandleModify, TDeleteCommentsByCardId } from "./types";
 
 const CardPage: FC<ICardPage> = ({ openedCardId, setOpenedCardId }) => {
 
@@ -26,13 +26,13 @@ const CardPage: FC<ICardPage> = ({ openedCardId, setOpenedCardId }) => {
   useClickKey("Escape", () => setOpenedCardId("-1"), blockESC);
 
   const dispatch = useAppDispatch();
-  const cards = useAppSelector(state => state.cards);
+  const cards = useAppSelector(selectCards);
   const openCard = (cards.find(item => item.cardID === openedCardId));
 
-  const columns = useAppSelector(state => state.columns);
+  const columns = useAppSelector(selectColumns);
   const columnName = openCard?.columnID !== undefined ? columns[openCard.columnID] : "Неизвестная колонка";
 
-  const comments = useAppSelector(state => state.comments);
+  const comments = useAppSelector(selectComments);
   const { deleteComment } = commentsActions;
 
   const deleteCommentsByCardId: TDeleteCommentsByCardId = (cardID) => {
@@ -92,7 +92,6 @@ const CardPage: FC<ICardPage> = ({ openedCardId, setOpenedCardId }) => {
         <Comments
           setBlockESC={setBlockESC}
           idCard={openCard?.cardID || ""}
-          setCountComments={handleModify}
         />
       </div>
     </div>
