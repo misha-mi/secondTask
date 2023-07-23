@@ -9,11 +9,12 @@ import { useAppDispatch, useAppSelector } from "../../../store/redux-hooks";
 import { cardsActions } from "../../../store/ducks/cards";
 import { columnsActions } from "../../../store/ducks/columns";
 
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 
 import { v4 as uuidv4 } from 'uuid';
 
 import { IColumn, THandleAddCard, THandleModifyColumnName } from "./types";
+
 
 const Column: FC<IColumn> = ({ columnIDForFilter }) => {
 
@@ -24,6 +25,12 @@ const Column: FC<IColumn> = ({ columnIDForFilter }) => {
   const author = useAppSelector(state => state.author);
   const columnName = useAppSelector(state => state.columns[columnIDForFilter]);
 
+  // const cardsByID = useAppSelector((state) => selectCardsById(state, columnIDForFilter));
+
+  useEffect(() => {
+    console.log(cards, columnIDForFilter);
+  }, [cards]);
+
   const handleClose = () => {
     setAddingMode(false);
   }
@@ -32,7 +39,6 @@ const Column: FC<IColumn> = ({ columnIDForFilter }) => {
   const handleAddCard: THandleAddCard = (newCardName) => {
     dispatch(addCard({
       name: newCardName,
-      countComments: 0,
       columnID: columnIDForFilter,
       cardID: uuidv4(),
       description: "",
@@ -59,11 +65,10 @@ const Column: FC<IColumn> = ({ columnIDForFilter }) => {
 
       <div className="column__cards">
         {
-          cards.map(({ name, countComments, columnID, cardID }) => (
+          cards.map(({ name, columnID, cardID }) => (
             columnID === columnIDForFilter ? (
               <Card
                 cardName={name}
-                commentsCount={countComments}
                 key={cardID}
                 cardID={cardID}
               />

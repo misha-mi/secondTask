@@ -10,7 +10,7 @@ import { commentsActions } from "../../../store/ducks/comments";
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 
 import { IComments, THandleAdd, THandleAddingMode } from "./types";
 
@@ -37,11 +37,6 @@ const Comments: FC<IComments> = ({ setBlockESC, idCard, setCountComments }) => {
     }));
     handleAddingMode(false);
   }
-
-  useEffect(() => {
-    const count = comments.filter(comment => idCard === comment.cardID).length;
-    setCountComments("countComments", count);
-  }, [comments]);
 
   return (
     <>

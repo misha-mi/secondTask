@@ -1,7 +1,6 @@
 
 export type TCard = {
   name: string,
-  countComments: number,
   columnID: number,
   cardID: string,
   description: string

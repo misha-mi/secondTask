@@ -5,18 +5,20 @@ import edit from "../../../assets/edit.png";
 import SmallButton from "../../ui/small-button/small-button";
 import TextArea from "../../ui/text-area/text-area";
 
-import { useAppDispatch } from "../../../store/redux-hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/redux-hooks";
 import { openedCardActions } from "../../../store/ducks/opened-card";
 
 import { FC, useRef } from "react";
 
 import { ICard } from "./types";
 
-const Card: FC<ICard> = ({ cardName, commentsCount, cardID }) => {
+const Card: FC<ICard> = ({ cardName, cardID }) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const dispatch = useAppDispatch();
   const { setIdOpenPage } = openedCardActions;
+
+  const commentsCount = useAppSelector(store => store.comments).filter(item => item.cardID === cardID).length;
 
   return (
     <div className="card" onClick={() => dispatch(setIdOpenPage(cardID))}>
