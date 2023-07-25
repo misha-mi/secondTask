@@ -1,18 +1,27 @@
 import "./text-area.sass";
-import { ITextArea, THandleInputTextArea } from "./types";
+import { ITextArea, IForm } from "./types";
 
-import { FC, FormEvent, useRef, useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { FC, useRef, useEffect } from "react";
 
 
 const TextArea: FC<ITextArea> = ({ value, CSSModifier = "", modificationMode = true, focus = false, setValue }) => {
 
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const { register, handleSubmit } = useForm<IForm>({
+    defaultValues: {
+      value: value
+    }
+  });
+
+  const { ref, ...rest } = register("value");
+
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const checkEmpty = (value: string) => {
     if (!value) {
-      textAreaRef.current?.classList.add("textArea__empty")
+      textAreaRef.current?.classList.add("text-area__empty")
     } else {
-      textAreaRef.current?.classList.remove("textArea__empty")
+      textAreaRef.current?.classList.remove("text-area__empty")
     }
   }
 
@@ -26,9 +35,9 @@ const TextArea: FC<ITextArea> = ({ value, CSSModifier = "", modificationMode = t
     }
   }
 
-  const handleInputTextArea: THandleInputTextArea = (value) => {
+  const handleInputTextArea: SubmitHandler<IForm> = (value) => {
     if (setValue) {
-      setValue(value);
+      setValue(value.value);
     }
     handleCalculateHight();
   }
@@ -49,14 +58,21 @@ const TextArea: FC<ITextArea> = ({ value, CSSModifier = "", modificationMode = t
   }, [modificationMode])
 
   const showUI = modificationMode ? (
-    <textarea
-      className={"textArea " + CSSModifier}
-      value={value}
-      ref={textAreaRef}
-      onInput={(e: FormEvent<HTMLTextAreaElement>) => handleInputTextArea((e.target as HTMLTextAreaElement).value)}
-      onBlur={handleBlur}>
-    </textarea>
-  ) : <div className={"textArea__mod-false " + CSSModifier}>{value}</div>
+    <form
+      className="text-area_w100p"
+      onChange={handleSubmit(handleInputTextArea)}
+    >
+      <textarea
+        className={"text-area " + CSSModifier}
+        {...rest}
+        ref={(e) => {
+          ref(e);
+          textAreaRef.current = e;
+        }}
+        onBlur={handleBlur}>
+      </textarea>
+    </form>
+  ) : <div className={"text-area__mod-false " + CSSModifier}>{value}</div>
 
 
   return (

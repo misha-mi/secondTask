@@ -6,4 +6,6 @@ export interface ITextArea {
   setValue?: (value: string) => void
 }
 
-export type THandleInputTextArea = (value: string) => void
+export interface IForm {
+  value: string
+}
